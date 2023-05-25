@@ -2,7 +2,7 @@ let pirmasvard=0;
 let paskutinisvard=3;
 function loadSampleNames() {
 
-    let names = ["Andrew", "Robert", "Steve" ].slice(pirmasvard, paskutinisvard);;
+    let names = ["Andrew", "Robert", "Steve" ].slice(pirmasvard, paskutinisvard);
     pirmasvard+=3;
     paskutinisvard+=3;
     if (localStorage.getItem("names")) {
@@ -14,7 +14,8 @@ function loadSampleNames() {
     localStorage.setItem("names", JSON.stringify(names));
   
     let gridItems = document.querySelectorAll(".grid-item");
-  
+
+
     for (let i = gridItems.length - 1; i >= 0; i--) {
       let nameIndex = names.length - 1 - i;
       if (nameIndex >= 0) {
@@ -23,40 +24,26 @@ function loadSampleNames() {
     }
   }
   
-  if (!localStorage.getItem("names")) {
-
-    let names = [];
-    localStorage.setItem("names", JSON.stringify(names));
-  }
-
   let loadSampleButton = document.querySelector(".load-sample");
   loadSampleButton.addEventListener("click", loadSampleNames);
+
   
-
-
 function exportToFile() {
-
     let gridItems = document.querySelectorAll(".grid-item");
-  
-
     let userData = "";
     for (let i = 0; i < gridItems.length; i++) {
         let itemText = gridItems[i].textContent;
-        if (itemText.trim() !== "empty") {
+        if (itemText.trim() != "empty") {
           userData += itemText + "\n" ;
         }
       }
   
 
-    let file = new Blob([userData], { type: "text/plain" });
-  
-
+    let file = new Blob([userData]);
     let fileURL = URL.createObjectURL(file);
-
     let downloadLink = document.createElement("a");
     downloadLink.href = fileURL;
     downloadLink.download = "sarasas.txt";
-  
     downloadLink.click();
   }
   
@@ -64,30 +51,22 @@ function exportToFile() {
   exportButton.addEventListener("click", exportToFile);
 
 
-
-
 function copyToClipboard() {
     let gridItems = document.querySelectorAll(".grid-item");
-  
     let userData = "";
     for (let i = 0; i < gridItems.length; i++) {
       let itemText = gridItems[i].textContent;
       if (itemText.trim() !== "empty") {
-        userData += itemText + "\n";
+        userData += itemText + " ";
       }
     }
-    
-  
     navigator.clipboard.writeText(userData)
-
   }
   
   let copyButton = document.querySelector(".copy-button");
   copyButton.addEventListener("click", copyToClipboard);
   
-
 const dropButton = document.getElementById("drop-button");
-
 dropButton.addEventListener("click", function() {
   
   const input = document.createElement("input");
@@ -102,8 +81,6 @@ dropButton.addEventListener("click", function() {
       const fileType = file.type;
       if (fileType === "text/plain") {
         processTextFile(fileContent);
-      } else {
-        alert("Nepalaikomas failo tipas. Pasirinkite tekstą (text file).");
       }
     });
     reader.readAsText(file);
@@ -151,5 +128,3 @@ function drop(event) {
     this.innerHTML = event.dataTransfer.getData('text/html');
   }
 }
-
-
