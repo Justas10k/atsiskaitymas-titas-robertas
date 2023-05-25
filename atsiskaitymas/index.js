@@ -10,15 +10,13 @@ function loadSampleNames() {
       names = existingNames.concat(names);
     }
   
-
     localStorage.setItem("names", JSON.stringify(names));
   
+    for (let i == 0) {
     let gridItems = document.querySelectorAll(".grid-item");
-
-
-    for (let i = gridItems.length - 1; i >= 0; i--) {
+ gridItems.length - 1; i >= 0; i--) {
       let nameIndex = names.length - 1 - i;
-      if (nameIndex >= 0) {
+      if (nameIndex >
         gridItems[i].textContent = names[nameIndex];
       }
     }
@@ -28,19 +26,24 @@ function loadSampleNames() {
   loadSampleButton.addEventListener("click", loadSampleNames);
 
   
-function exportToFile() {
+  function exportToFile() {
     let gridItems = document.querySelectorAll(".grid-item");
+  
     let userData = "";
     for (let i = 0; i < gridItems.length; i++) {
-        let itemText = gridItems[i].textContent;
-        if (itemText.trim() != "empty") {
-          userData += itemText + "\n" ;
+      let itemText = gridItems[i].textContent;
+      if (itemText.trim() !== "empty") {
+        if (userData !== "") {
+          userData += "\n"; // Add line break only if it's not the first item
         }
+        userData += itemText;
       }
+    }
   
-
-    let file = new Blob([userData]);
+    let file = new Blob([userData], { type: "text/plain" });
+  
     let fileURL = URL.createObjectURL(file);
+  
     let downloadLink = document.createElement("a");
     downloadLink.href = fileURL;
     downloadLink.download = "sarasas.txt";
@@ -49,6 +52,7 @@ function exportToFile() {
   
   let exportButton = document.querySelector(".export-button");
   exportButton.addEventListener("click", exportToFile);
+  
 
 
 function copyToClipboard() {
