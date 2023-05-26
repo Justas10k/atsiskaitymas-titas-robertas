@@ -32,7 +32,7 @@ function loadSampleNames() {
       let itemText = gridItems[i].textContent;
       if (itemText.trim() !== "empty") {
         if (userData !== "") {
-          userData += "\n"; // Add line break only if it's not the first item
+          userData += "\n";
         }
         userData += itemText;
       }
