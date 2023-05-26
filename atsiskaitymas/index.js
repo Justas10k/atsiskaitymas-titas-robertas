@@ -12,14 +12,12 @@ function loadSampleNames() {
   
     localStorage.setItem("names", JSON.stringify(names));
   
-    for (let i == 0) {
-    let gridItems = document.querySelectorAll(".grid-item");
- gridItems.length - 1; i >= 0; i--) {
+    for (let i = 0; i <= gridItems.length - 1; i++) {
       let nameIndex = names.length - 1 - i;
-      if (nameIndex >
-        gridItems[i].textContent = names[nameIndex];
+      if (nameIndex >= 0) {
+      gridItems[i].textContent = names[nameIndex];
       }
-    }
+      }
   }
   
   let loadSampleButton = document.querySelector(".load-sample");
